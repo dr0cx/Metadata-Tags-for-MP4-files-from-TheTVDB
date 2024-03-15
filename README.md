@@ -6,5 +6,4 @@
 - Move API portion to a function
 - Move metadata write portion to function
 - Build out for more metadata tags. Track (episode), Disc (season), Year, Album (Season name if applicable), etc
-
-  
+    - COMPLETED
