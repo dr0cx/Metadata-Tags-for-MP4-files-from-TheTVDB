@@ -2,13 +2,12 @@ import os
 import re
 from mutagen.mp4 import MP4
 
-def set_episode_tags(DIRECTORY, episode_titles, SHOW, total_tracks, episode_data):
+def set_episode_tags(DIRECTORY, episode_data, SHOW, total_tracks):
     """
     Set episode metadata tags for MP4 files in the given directory.
 
     Args:
     - DIRECTORY: The directory containing the MP4 files.
-    - episode_titles: Dictionary containing episode titles and metadata.
     - SHOW: The name of the TV show.
     - total_tracks: Total number of tracks in the season.
     - episode_data: Dictionary containing episode data retrieved from the API.
