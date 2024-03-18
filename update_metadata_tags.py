@@ -14,7 +14,7 @@ episode_titles = {}
 # Initialize an empty dictionary to store series name and seasons
 show_data = {}
 
-get_show_data(API_KEY, SHOW_ID, show_data)
+show_data = get_show_data(API_KEY, SHOW_ID, show_data)
 
 # Retrieve series name from show_data
 SHOW = show_data[SHOW_ID]["name"]
