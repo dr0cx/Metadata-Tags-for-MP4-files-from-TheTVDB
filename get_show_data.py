@@ -2,6 +2,20 @@ import requests
 
 def get_show_data(API_KEY, SHOW_ID, show_data):
 
+    """
+    Retrieve TV Show Name and total number of seasons
+    from the API and parse the JSON response.
+
+    Args:
+        API_KEY (str): Key that allows access to API.
+        SHOW_ID (str): The show ID on TheTVDB
+        show_data (dict): Empty dictionary
+
+    Returns:
+        dict: A dictionary containing show name and number of seasons.
+              Returns an empty dictionary if no show data is found or if there's an error.
+    """
+
     # Initialize show_data
     show_data[SHOW_ID] = {
         "name": '',
