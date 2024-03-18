@@ -28,11 +28,16 @@ def get_episode_tags(API_KEY, EPISODES_ENDPOINT, SHOW, episode_titles):
         if 'data' in episode_data:
             # Extract episode titles and numbers from the API response
             for episode in episode_data['data']:
+
                 episode_number = f"{SHOW.replace(':','')} - S{episode['airedSeason']:02d}E{episode['airedEpisodeNumber']:02d}"
                 episode_title = episode.get('episodeName', 'Unknown Title')
                 episode_aired = episode.get('firstAired', 'Unknown Date')
                 episode_year = episode_aired.split('-')[0]
-                episode_titles[episode_number] = {'title': episode_title, 'year': episode_year}
+
+                episode_titles[episode_number] = {
+                    "title": episode_title,
+                    "year": episode_year
+                }
 
             print("Episode titles loaded successfully.")
         else:

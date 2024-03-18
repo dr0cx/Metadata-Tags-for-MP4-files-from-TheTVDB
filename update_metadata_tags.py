@@ -30,18 +30,24 @@ SEASON_TOTAL = show_data[SHOW_ID]["total_seasons"]
 # Loop over each season
 for SEASON_INT in range(SEASON_INT, SEASON_TOTAL + 1):
     SEASON_STR = f"{SEASON_INT:02d}"
-    DIRECTORY = rf'Z:\\DIRECTORY\\SUBDIRECTORY\\{SHOW.replace(":", "")}\\Season {SEASON_STR}'
-    clear_tags(DIRECTORY)
 
-    # Endpoint URL for retrieving episode information
-    EPISODES_ENDPOINT = f'https://api.thetvdb.com/series/{SHOW_ID}/episodes/query?airedSeason={SEASON_INT}'
+    try:
+        DIRECTORY = rf'Z:\\DIRECTORY\\SUBDIRECTORY\\{SHOW.replace(":", "")}\\Season {SEASON_STR}'
+        clear_tags(DIRECTORY)
 
-    # get episode data
-    episode_data = get_episode_tags(API_KEY, EPISODES_ENDPOINT, SHOW, episode_titles)
+        # Endpoint URL for retrieving episode information
+        EPISODES_ENDPOINT = f'https://api.thetvdb.com/series/{SHOW_ID}/episodes/query?airedSeason={SEASON_INT}'
 
-    # Assuming total_tracks represents the total number of episodes in the season
-    total_tracks = len(episode_titles)
+        # get episode data
+        episode_data = get_episode_tags(API_KEY, EPISODES_ENDPOINT, SHOW, episode_titles)
 
-    # Iterate over each MP4 file in the directory
-    # WRITE data to tag metadata
-    set_episode_tags(DIRECTORY, episode_data, SHOW, total_tracks)
+        # Assuming total_tracks represents the total number of episodes in the season
+        total_tracks = len(episode_titles)
+
+        # Iterate over each MP4 file in the directory
+        # WRITE data to tag metadata
+        set_episode_tags(DIRECTORY, episode_data, SHOW, total_tracks)
+
+    except FileNotFoundError:
+        print(f"Season {SEASON_INT} not found for {SHOW}. Skipping...")
+        continue
