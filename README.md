@@ -26,8 +26,12 @@
     - python update_metadata_tags.py
 
 # Potential future updates to reduce manual intervention
-- Read directory to load list of show names into a dictonary
-- Use API agasint the dictonary to get SHOW_ID for each show
+- Read directory to load list of show names into a dictonary series_directory { "show_name": {series folder name}, "show_id": {placeholder for function to get series_id from TheTVDB} }
+- Use API agasint series_directory[iterator]["show_name"] to get SHOW_ID for each show
+- Function to determine Season folder with the most recently added episode
+- Determine if the recently added episode is within the past week
+- Only update the tags for most recent episode
+- This will require some way to differentiate betwen a show added in its entirety vs a show that is updtaed one episode at a time
 
 # TODOs COMPLETED
 - Function to count total number of seasons
