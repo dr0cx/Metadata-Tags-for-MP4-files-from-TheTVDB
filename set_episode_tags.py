@@ -53,3 +53,6 @@ def set_episode_tags(DIRECTORY, episode_data, SHOW, total_tracks):
                     print(f"No title found for episode {episode_key} in the episode_titles dictionary")
             else:
                 print(f"Unable to extract episode number from filename: {filename}")
+        else:
+            print(f"Not configured to work with this file extension at this time: {filename}")
+            continue
