@@ -32,10 +32,17 @@ def set_filename(DIRECTORY, episode_data, SHOW, total_tracks):
                 # Construct new filename
                 new_filename = f"{SHOW.replace(':','')} - S{disc:02}E{track:02}.mp4"
 
-                # Rename the file
-                os.rename(mp4_file_path, os.path.join(DIRECTORY, new_filename))
+                # Check if the filename is different from the new filename
+                if filename != new_filename:
+                    # Path to the MP4 file
+                    mp4_file_path = os.path.join(DIRECTORY, filename)
 
-                print(f"Renamed {filename} to {new_filename}")
+                    # Rename the file
+                    os.rename(mp4_file_path, os.path.join(DIRECTORY, new_filename))
+
+                    print(f"Renamed {filename} to {new_filename}")
+                else:
+                    print(f"Skipping rename function for {filename} as it already matches the format")
 
             else:
                 print(f"No title found for episode {episode_key} in the episode_titles dictionary")
