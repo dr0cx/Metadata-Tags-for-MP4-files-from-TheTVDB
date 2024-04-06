@@ -6,10 +6,10 @@ from set_episode_tags import set_episode_tags
 from set_filename import set_filename
 
 # Constants
-API_KEY = <YOUR API KEY HERE>
+API_KEY = 'YOUR API KEY HERE'
 
 # Manually enter your TV show ID
-SHOW_ID = <SHOW_ID>
+SHOW_ID = 'THETVDB Show ID'
 
 # Initialize an empty dictionary to store episode titles
 episode_titles = {}
@@ -34,7 +34,7 @@ SEASON_TOTAL = show_data[SHOW_ID]["total_seasons"]
 for SEASON_INT in range(SEASON_INT, SEASON_TOTAL + 1):
     SEASON_STR = f"{SEASON_INT:02d}"
     try:
-        DIRECTORY = rf'Z:\\{SHOW.replace(":", "")}\\Season {SEASON_STR}'
+        DIRECTORY = rf'Z:\\PLEX\\TV SERIES\\{SHOW.replace(":", "")}\\Season {SEASON_STR}'
 
         clear_tags(DIRECTORY)
 
