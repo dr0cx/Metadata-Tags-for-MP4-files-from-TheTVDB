@@ -1,12 +1,14 @@
+# GET data from API
 from get_show_data import get_show_data
 from clear_tags import clear_tags
 from get_episode_tags import get_episode_tags
 from set_episode_tags import set_episode_tags
+from set_filename import set_filename
 
 # Constants
-# GET data from API
-API_KEY = '1234567890' # your TheTVDB api key here
-SHOW_ID = '12345'  # Manually enter from https://thetvdb.com/series/{SHOW}/  THETVDB.COM SERIES ID = "12345"
+API_KEY = 'ce937850-edd9-4100-aac9-3c5164093f3b'
+
+SHOW_ID = '164981'   # Manually enter your TV show ID
 
 # Initialize an empty dictionary to store episode titles
 episode_titles = {}
@@ -30,13 +32,16 @@ SEASON_TOTAL = show_data[SHOW_ID]["total_seasons"]
 # Loop over each season
 for SEASON_INT in range(SEASON_INT, SEASON_TOTAL + 1):
     SEASON_STR = f"{SEASON_INT:02d}"
-
     try:
-        DIRECTORY = rf'Z:\\DIRECTORY\\SUBDIRECTORY\\{SHOW.replace(":", "")}\\Season {SEASON_STR}'
+        # DIRECTORY = rf'F:\\PLEX\\SERIES\\{SHOW.replace(":", "")}\\Season {SEASON_STR}'
+        # DIRECTORY = rf'D:\\SERIES\\{SHOW.replace(":", "")}\\Season {SEASON_STR}'
+        DIRECTORY = rf'D:\\Staging\\{SHOW.replace(":", "")}\\Season {SEASON_STR}'
+
         clear_tags(DIRECTORY)
 
         # Endpoint URL for retrieving episode information
         EPISODES_ENDPOINT = f'https://api.thetvdb.com/series/{SHOW_ID}/episodes/query?airedSeason={SEASON_INT}'
+        print(EPISODES_ENDPOINT)
 
         # get episode data
         episode_data = get_episode_tags(API_KEY, EPISODES_ENDPOINT, SHOW, episode_titles)
@@ -47,6 +52,9 @@ for SEASON_INT in range(SEASON_INT, SEASON_TOTAL + 1):
         # Iterate over each MP4 file in the directory
         # WRITE data to tag metadata
         set_episode_tags(DIRECTORY, episode_data, SHOW, total_tracks)
+
+        # RENAME file
+        set_filename(DIRECTORY, episode_data, SHOW, total_tracks)
 
     except FileNotFoundError:
         print(f"Season {SEASON_INT} not found for {SHOW}. Skipping...")
