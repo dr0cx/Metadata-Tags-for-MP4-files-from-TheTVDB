@@ -10,18 +10,20 @@ def clear_tags(directory):
     """
     for filename in os.listdir(directory):
         if filename.endswith(".mp4"):
-            # Open the MP4 file for editing
-            mp4_file_path = os.path.join(directory, filename)
-            mp4 = MP4(mp4_file_path)
+            try:
+                # Open the MP4 file for editing
+                mp4_file_path = os.path.join(directory, filename)
+                mp4 = MP4(mp4_file_path)
 
-            # Clear metadata tags
-            mp4['\xa9nam'] = ''
-            mp4['\xa9ART'] = ''
-            mp4['\xa9day'] = ''
-            mp4["trkn"] = []
-            mp4["disk"] = []
+                # Clear metadata tags
+                mp4['\xa9nam'] = ''
+                mp4['\xa9ART'] = ''
+                mp4['\xa9day'] = ''
+                mp4["trkn"] = []
+                mp4["disk"] = []
 
-            # Save the changes
-            mp4.save()
-
-            print(f"Cleared metadata tags for {filename}")
+                # Save the changes
+                mp4.save()
+            except Exception as e:
+                print(f"Error processing file {filename}: {e}")
+    print(f"Cleared metadata tags for {directory}")

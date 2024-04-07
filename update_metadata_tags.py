@@ -21,19 +21,9 @@ show_data = {}
 
 show_data = get_show_data(API_KEY, SHOW_ID, show_data)
 
-SHOW = show_data[SHOW_ID]["name"]
-SHOW_DIR = re.sub(r'[^a-zA-Z0-9\s]', '', SHOW)
-
-# Initialize an empty dictionary to store episode titles
-episode_titles = {}
-
-# Initialize an empty dictionary to store series name and seasons
-show_data = {}
-
-show_data = get_show_data(API_KEY, SHOW_ID, show_data)
-
 # Retrieve series name from show_data
 SHOW = show_data[SHOW_ID]["name"]
+SHOW_DIR = re.sub(r'[^\w\s()]', '', SHOW)
 
 # Assume there is a season 0.
 # If no season 0 exists in TheTVDB or if no season 0 exists in user Directory,

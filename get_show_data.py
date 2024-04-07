@@ -1,7 +1,6 @@
 import requests
 
 def get_show_data(API_KEY, SHOW_ID, show_data):
-
     """
     Retrieve TV Show Name and total number of seasons
     from the API and parse the JSON response.
@@ -48,3 +47,5 @@ def get_show_data(API_KEY, SHOW_ID, show_data):
     else:
         # Handle request errors
         print("Error:", response.status_code)
+
+    return show_data

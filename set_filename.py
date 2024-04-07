@@ -16,36 +16,42 @@ def set_filename(DIRECTORY, episode_data, SHOW, total_tracks):
     # Iterate over each MP4 file in the directory
     for filename in os.listdir(DIRECTORY):
         if filename.endswith(".mp4"):
-            # Extract episode number from the filename
-            match = re.search(r'S(\d+)E(\d+)', filename.upper())
-            if match:
-                season_number = match.group(1)
-                episode_number = match.group(2)
-                episode_key = f"{SHOW.replace(':','')} - S{season_number}E{episode_number}"
-
-                track = int(episode_number)
-                disc = int(season_number)
-
-                # Path to the MP4 file
+            try:
+                # Open the MP4 file
                 mp4_file_path = os.path.join(DIRECTORY, filename)
+                mp4 = MP4(mp4_file_path)
+                # Extract episode number from the filename
+                match = re.search(r'S(\d+)E(\d+)', filename.upper())
+                if match:
+                    season_number = match.group(1)
+                    episode_number = match.group(2)
+                    episode_key = f"{SHOW.replace(':','')} - S{season_number}E{episode_number}"
 
-                # Construct new filename
-                new_filename = f"{SHOW.replace(':','')} - S{disc:02}E{track:02}.mp4"
+                    track = int(episode_number)
+                    disc = int(season_number)
 
-                # Check if the filename is different from the new filename
-                if filename != new_filename:
                     # Path to the MP4 file
                     mp4_file_path = os.path.join(DIRECTORY, filename)
 
-                    # Rename the file
-                    os.rename(mp4_file_path, os.path.join(DIRECTORY, new_filename))
+                    # Construct new filename
+                    new_filename = f"{SHOW.replace(':','')} - S{disc:02}E{track:02}.mp4"
 
-                    print(f"Renamed {filename} to {new_filename}")
+                    # Check if the filename is different from the new filename
+                    if filename != new_filename:
+                        # Path to the MP4 file
+                        mp4_file_path = os.path.join(DIRECTORY, filename)
+
+                        # Rename the file
+                        os.rename(mp4_file_path, os.path.join(DIRECTORY, new_filename))
+
+                        print(f"Renamed {filename} to {new_filename}")
+                    else:
+                        print(f"Skipping rename function for {filename} as it already matches the format")
+
                 else:
-                    print(f"Skipping rename function for {filename} as it already matches the format")
-
-            else:
-                print(f"No title found for episode {episode_key} in the episode_titles dictionary")
+                    print(f"No title found for episode {episode_key} in the episode_titles dictionary")
+            except Exception as e:
+                print(f"Error processing file {filename}: {e}")
         else:
             print(f"Not configured to work with this file extension at this time: {filename}")
             continue
