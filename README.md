@@ -10,18 +10,18 @@
 
 # How to use
 - Place files in some directory on your machine
-- Line 33 of update_metadata_tags.py, enter the correct path to your series directory
+- Line 50 of update_metadata_tags.py, enter the correct path to your series directory
 - Navigate to TheTVDB:
     - Create an account
     - At the bottom of the page in the About section, click the link for API
     - Click the "Get Started" button
     - Enter Personal use in all three text fields
     - Get your API key
-    - Copy API key value and paste it into update_metadata_tags.py line 8, API_KEY
+    - Copy API key value and paste it into update_metadata_tags.py line 11, API_KEY
 - search TheTVDB for the series you want
     - Click on the series name
     - Find the numeric id on the table row "TheTVDB.com Series ID"
-    - Copy the numeric value and paste it into update_metadata_tags.py line 9, SHOW_ID
+    - Copy the numeric value and paste it into update_metadata_tags.py line 14, SHOW_ID
 - Use VS Code Terminal, type
     - python update_metadata_tags.py
 

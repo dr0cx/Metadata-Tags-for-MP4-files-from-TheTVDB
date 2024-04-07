@@ -1,3 +1,5 @@
+import re
+
 # GET data from API
 from get_show_data import get_show_data
 from clear_tags import clear_tags
@@ -10,6 +12,17 @@ API_KEY = 'YOUR API KEY HERE'
 
 # Manually enter your TV show ID
 SHOW_ID = 'THETVDB Show ID'
+
+# Initialize an empty dictionary to store episode titles
+episode_titles = {}
+
+# Initialize an empty dictionary to store series name and seasons
+show_data = {}
+
+show_data = get_show_data(API_KEY, SHOW_ID, show_data)
+
+SHOW = show_data[SHOW_ID]["name"]
+SHOW_DIR = re.sub(r'[^a-zA-Z0-9\s]', '', SHOW)
 
 # Initialize an empty dictionary to store episode titles
 episode_titles = {}
@@ -34,7 +47,7 @@ SEASON_TOTAL = show_data[SHOW_ID]["total_seasons"]
 for SEASON_INT in range(SEASON_INT, SEASON_TOTAL + 1):
     SEASON_STR = f"{SEASON_INT:02d}"
     try:
-        DIRECTORY = rf'Z:\\PLEX\\TV SERIES\\{SHOW.replace(":", "")}\\Season {SEASON_STR}'
+        DIRECTORY = rf'Z:\\PLEX\\TV SERIES\\{SHOW_DIR}\\Season {SEASON_STR}'
 
         clear_tags(DIRECTORY)
 
@@ -56,5 +69,5 @@ for SEASON_INT in range(SEASON_INT, SEASON_TOTAL + 1):
         set_filename(DIRECTORY, episode_data, SHOW, total_tracks)
 
     except FileNotFoundError:
-        print(f"Season {SEASON_INT} not found for {SHOW}. Skipping...")
+        print(f"Season {SEASON_INT} not found for {SHOW_DIR}. Skipping...")
         continue
