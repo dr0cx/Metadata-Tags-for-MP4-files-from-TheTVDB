@@ -10,6 +10,8 @@
 
 # How to use
 - Place files in some directory on your machine
+- pip install requests
+- pip install mutagen
 - Line 50 of update_metadata_tags.py, enter the correct path to your series directory
 - Navigate to TheTVDB:
     - Create an account
